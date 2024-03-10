@@ -5,21 +5,12 @@ import kotlin.math.max
 const val ERROR_TYPE = -1
 const val ERROR_LIMIT = -2
 fun main() {
-    println("Комиссия " +  comission(50_000, "Visa") + " рублей")
+    println("Комиссия " +  comission(75_000, "Mastercard") + " рублей")
 }
 
-//fun condition(typeCard : String,transfer: Int, previous:Int ) {
-//    if (transfer < 150_000 && transfer + previous <= 600_000)
-//        comission(transfer,typeCard, previous)  else ERROR_LIMIT
-//}
 
 fun comission(transfer: Int ,typeCard : String = "Мир" , previous:Int = 0 ): Int {
-    
-//    return (typeCard)  if (transfer < 150_000 && transfer + previous <= 600_000)
-//        comission(typeCard, transfer, previous)  else ERROR_LIMIT
-
-
-     return when (typeCard) {
+         val comission1 =  when (typeCard) {
         "Visa" -> max(35, (transfer * 0.0075).toInt())
         "Mastercard" -> if (previous > 75_000) {
             (transfer * 0.006 + 20).toInt()
@@ -31,8 +22,11 @@ fun comission(transfer: Int ,typeCard : String = "Мир" , previous:Int = 0 ): 
 
         "Мир" -> 0
         else -> ERROR_TYPE
-
     }
+
+    val condition =  if (transfer < 150_000 && transfer + previous <= 600_000)
+        comission1  else ERROR_LIMIT
+    return condition
     }
 
 
